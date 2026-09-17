@@ -43,13 +43,10 @@ exact previous state after a refresh.
 
 ### Branding note on the logo
 
-The Home view and Navbar use a styled text/wordmark placeholder for the
-Richfield Connect logo (an "R" mark in Richfield Blue `#003087`), as
-permitted by the brief ("The Richfield Connect logo **or a styled text
-placeholder**"). The development environment this project was built in did
-not have network access to richfield.ac.za to pull the official institution
-logo asset, so a brand-consistent placeholder was used instead — see
-`src/components/Logo.jsx`.
+The Home view and Navbar display the official Richfield logo
+(`src/assets/richfield-logo.png`), extracted from the institution's
+supplied logo asset, with the word "Connect" styled alongside it to form
+the Richfield Connect brand mark — see `src/components/Logo.jsx`.
 
 ## Running the application locally
 

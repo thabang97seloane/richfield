@@ -7,38 +7,24 @@
   white-space: nowrap;
 }
 
-.shield {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
+.logoImage {
+  display: block;
   height: 2rem;
-  border-radius: 6px 6px 6px 0;
-  background: linear-gradient(135deg, var(--rf-blue), var(--rf-blue-dark));
-  padding: 0.3rem;
-}
-
-.shieldIcon {
-  width: 100%;
-  height: 100%;
-}
-
-.wordmark {
-  font-size: 1.15rem;
-  letter-spacing: 0.2px;
+  width: auto;
+  border-radius: 4px;
 }
 
 .connect {
+  font-size: 1.15rem;
   font-weight: 400;
   color: var(--rf-grey-mid);
+  letter-spacing: 0.2px;
 }
 
-.lg .shield {
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.6rem;
+.lg .logoImage {
+  height: 3.6rem;
 }
 
-.lg .wordmark {
+.lg .connect {
   font-size: 1.8rem;
 }
