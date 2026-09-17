@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const AppContext = createContext(null);
 
@@ -23,20 +23,8 @@ function loadPosts() {
   }
 }
 
-const initialState = {
-  user: null,
-  posts: [],
-};
-
 function appReducer(state, action) {
   switch (action.type) {
-    case "HYDRATE":
-      return {
-        ...state,
-        user: action.payload.user,
-        posts: action.payload.posts,
-      };
-
     case "REGISTER_USER":
       return {
         ...state,
@@ -74,35 +62,26 @@ function appReducer(state, action) {
   }
 }
 
+// Lazily reads localStorage once, before the first render, so there is no
+// separate hydration pass or loading flicker.
+function initState() {
+  return { user: loadUser(), posts: loadPosts() };
+}
+
 export function AppProvider({ children }) {
-  const [state, dispatch] = useReducer(appReducer, initialState);
-  const [hydrated, setHydrated] = useState(false);
+  const [state, dispatch] = useReducer(appReducer, undefined, initState);
 
-  // Hydrate global state from localStorage once, on first mount.
+  // Keep localStorage in sync whenever the user profile changes.
   useEffect(() => {
-    dispatch({
-      type: "HYDRATE",
-      payload: { user: loadUser(), posts: loadPosts() },
-    });
-    setHydrated(true);
-  }, []);
-
-  // Keep localStorage in sync whenever the user profile changes. Skipped
-  // until hydration finishes, otherwise this effect's stale closure over
-  // the pre-hydration state would overwrite localStorage with empty data.
-  useEffect(() => {
-    if (!hydrated) return;
     if (state.user) {
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(state.user));
     }
-  }, [state.user, hydrated]);
+  }, [state.user]);
 
-  // Keep localStorage in sync whenever the posts array changes (same
-  // hydration guard as above).
+  // Keep localStorage in sync whenever the posts array changes.
   useEffect(() => {
-    if (!hydrated) return;
     localStorage.setItem(POSTS_STORAGE_KEY, JSON.stringify(state.posts));
-  }, [state.posts, hydrated]);
+  }, [state.posts]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

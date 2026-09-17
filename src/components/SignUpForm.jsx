@@ -118,6 +118,7 @@ function SignUpForm() {
             id="fullName"
             name="fullName"
             type="text"
+            autoComplete="name"
             value={formData.fullName}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -173,6 +174,7 @@ function SignUpForm() {
             id="email"
             name="email"
             type="email"
+            autoComplete="email"
             value={formData.email}
             onChange={handleChange}
             onBlur={handleBlur}
