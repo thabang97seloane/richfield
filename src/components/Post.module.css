@@ -1,0 +1,88 @@
+.post {
+  background: var(--rf-white);
+  border-radius: var(--rf-radius);
+  box-shadow: var(--rf-shadow);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  animation: rf-fade-in 0.35s ease both;
+}
+
+@keyframes rf-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.username {
+  font-weight: 700;
+  color: var(--rf-blue);
+}
+
+.timestamp {
+  font-size: 0.78rem;
+  color: var(--rf-grey-mid);
+}
+
+.content {
+  margin: 0 0 1rem;
+  color: #222;
+  white-space: pre-wrap;
+}
+
+.footer {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--rf-grey-border);
+  background: var(--rf-white);
+  color: var(--rf-grey-mid);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: color var(--rf-transition), border-color var(--rf-transition), background-color var(--rf-transition);
+}
+
+.like:hover {
+  border-color: var(--rf-blue);
+  color: var(--rf-blue);
+}
+
+.liked {
+  color: var(--rf-danger);
+  border-color: var(--rf-danger);
+  background: #fdecea;
+}
+
+.delete {
+  border: 1px solid var(--rf-grey-border);
+  background: var(--rf-white);
+  color: var(--rf-grey-mid);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: color var(--rf-transition), border-color var(--rf-transition);
+}
+
+.delete:hover {
+  color: var(--rf-danger);
+  border-color: var(--rf-danger);
+}

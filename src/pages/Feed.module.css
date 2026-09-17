@@ -1,0 +1,19 @@
+.feed {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3.5rem;
+}
+
+.empty {
+  text-align: center;
+  color: var(--rf-grey-mid);
+  padding: 2rem;
+  background: var(--rf-white);
+  border-radius: var(--rf-radius);
+}
+
+@media (max-width: 767px) {
+  .feed {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+}

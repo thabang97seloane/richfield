@@ -1,0 +1,41 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  color: var(--rf-blue);
+  white-space: nowrap;
+}
+
+.shield {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px 6px 6px 0;
+  background: linear-gradient(135deg, var(--rf-blue), var(--rf-blue-dark));
+  color: var(--rf-white);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+}
+
+.wordmark {
+  font-size: 1.15rem;
+  letter-spacing: 0.2px;
+}
+
+.connect {
+  font-weight: 400;
+  color: var(--rf-grey-mid);
+}
+
+.lg .shield {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.6rem;
+}
+
+.lg .wordmark {
+  font-size: 1.8rem;
+}

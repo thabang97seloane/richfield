@@ -1,0 +1,56 @@
+.createPost {
+  background: var(--rf-white);
+  border-radius: var(--rf-radius);
+  box-shadow: var(--rf-shadow);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.createPost textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 0.75rem;
+  border: 1px solid var(--rf-grey-border);
+  border-radius: var(--rf-radius-sm);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color var(--rf-transition), box-shadow var(--rf-transition);
+}
+
+.createPost textarea:focus {
+  outline: none;
+  border-color: var(--rf-blue);
+  box-shadow: 0 0 0 3px rgba(0, 48, 135, 0.15);
+}
+
+.invalid {
+  border-color: var(--rf-danger) !important;
+}
+
+.error {
+  display: block;
+  color: var(--rf-danger);
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+.postButton {
+  background: var(--rf-blue);
+  color: var(--rf-white);
+  border: none;
+  padding: 0.55rem 1.4rem;
+  border-radius: var(--rf-radius-sm);
+  font-weight: 600;
+  transition: background-color var(--rf-transition), transform var(--rf-transition);
+}
+
+.postButton:hover {
+  background: var(--rf-blue-dark);
+  transform: translateY(-1px);
+}
