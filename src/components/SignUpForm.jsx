@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 import { validateField, validateForm } from "../utils/validation";
+import { hashPassword } from "../utils/hash";
 import ProfilePreview from "./ProfilePreview";
 import styles from "./SignUpForm.module.css";
 
@@ -79,7 +80,7 @@ function SignUpForm() {
     setErrors((prev) => ({ ...prev, [name]: error }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const formErrors = validateForm(formData);
@@ -89,11 +90,17 @@ function SignUpForm() {
       return;
     }
 
+    // Store a hash of the password rather than the raw value — this is a
+    // client-only app with no backend, so this only avoids keeping
+    // plaintext passwords in localStorage/state, not real server-side auth.
+    const passwordHash = await hashPassword(formData.password);
+
     const userProfile = {
       fullName: formData.fullName.trim(),
       studentNumber: formData.studentNumber.trim(),
       campus: formData.campus,
       email: formData.email.trim(),
+      passwordHash,
       interests: formData.interests,
       bio: formData.bio.trim(),
       registeredAt: new Date().toISOString(),

@@ -42,6 +42,22 @@
   background-color: var(--rf-blue-light);
 }
 
+.logout {
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--rf-radius-sm);
+  border: 1px solid var(--rf-grey-border);
+  background: var(--rf-white);
+  color: var(--rf-grey-mid);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color var(--rf-transition), border-color var(--rf-transition);
+}
+
+.logout:hover {
+  color: var(--rf-danger);
+  border-color: var(--rf-danger);
+}
+
 @media (max-width: 767px) {
   .navbar {
     flex-direction: column;

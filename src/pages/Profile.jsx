@@ -13,15 +13,20 @@ function getInitials(fullName) {
 
 function Profile() {
   const { state } = useAppContext();
-  const { user, posts } = state;
+  const { user, posts, isAuthenticated } = state;
 
-  if (!user) {
+  if (!isAuthenticated || !user) {
+    const hasAccount = Boolean(user);
     return (
       <div className={styles.empty}>
-        <h2>No profile found</h2>
-        <p>Register for Richfield Connect to create your academic profile.</p>
-        <Link to="/signup" className={styles.cta}>
-          Go to Sign Up
+        <h2>{hasAccount ? "You're logged out" : "No profile found"}</h2>
+        <p>
+          {hasAccount
+            ? "Log in to view your academic profile."
+            : "Register for Richfield Connect to create your academic profile."}
+        </p>
+        <Link to={hasAccount ? "/login" : "/signup"} className={styles.cta}>
+          {hasAccount ? "Go to Log In" : "Go to Sign Up"}
         </Link>
       </div>
     );

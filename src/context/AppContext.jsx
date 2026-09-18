@@ -4,6 +4,7 @@ const AppContext = createContext(null);
 
 const USER_STORAGE_KEY = "richfieldConnect_user";
 const POSTS_STORAGE_KEY = "richfieldConnect_posts";
+const AUTH_STORAGE_KEY = "richfieldConnect_authenticated";
 
 function loadUser() {
   try {
@@ -23,9 +24,14 @@ function loadPosts() {
   }
 }
 
+function loadAuthenticated() {
+  return localStorage.getItem(AUTH_STORAGE_KEY) === "true";
+}
+
 const initialState = {
   user: null,
   posts: [],
+  isAuthenticated: false,
 };
 
 function appReducer(state, action) {
@@ -35,12 +41,26 @@ function appReducer(state, action) {
         ...state,
         user: action.payload.user,
         posts: action.payload.posts,
+        isAuthenticated: action.payload.isAuthenticated,
       };
 
     case "REGISTER_USER":
       return {
         ...state,
         user: action.payload,
+        isAuthenticated: true,
+      };
+
+    case "LOGIN":
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
+
+    case "LOGOUT":
+      return {
+        ...state,
+        isAuthenticated: false,
       };
 
     case "ADD_POST":
@@ -82,7 +102,11 @@ export function AppProvider({ children }) {
   useEffect(() => {
     dispatch({
       type: "HYDRATE",
-      payload: { user: loadUser(), posts: loadPosts() },
+      payload: {
+        user: loadUser(),
+        posts: loadPosts(),
+        isAuthenticated: loadAuthenticated(),
+      },
     });
     setHydrated(true);
   }, []);
@@ -103,6 +127,12 @@ export function AppProvider({ children }) {
     if (!hydrated) return;
     localStorage.setItem(POSTS_STORAGE_KEY, JSON.stringify(state.posts));
   }, [state.posts, hydrated]);
+
+  // Keep localStorage in sync whenever the login/logout state changes.
+  useEffect(() => {
+    if (!hydrated) return;
+    localStorage.setItem(AUTH_STORAGE_KEY, String(state.isAuthenticated));
+  }, [state.isAuthenticated, hydrated]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

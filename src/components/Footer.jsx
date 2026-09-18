@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 import styles from "./Footer.module.css";
 
 function Footer() {
+  const { state } = useAppContext();
   const year = new Date().getFullYear();
 
   return (
@@ -18,8 +20,17 @@ function Footer() {
         <strong>Navigate</strong>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/feed">Feed</Link>
+        {state.isAuthenticated ? (
+          <>
+            <Link to="/profile">Profile</Link>
+            <Link to="/feed">Feed</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/signup">Sign Up</Link>
+            <Link to="/login">Log In</Link>
+          </>
+        )}
       </div>
 
       <div className={styles.column}>
